@@ -34,18 +34,30 @@
     <main class="w-full gap-4 px-4 my-6 grid lg:grid-cols-2">
         <div class="w-full grid gap-6 md:grid-cols-2">
 
-            <article class="flex gap-4 rounded-xl p-4 items-center bg-white shadow-xl grid grid-rows-3">
-                <div class="flex gap-3 min-w-40 flex-row">
-                    <img src="img/trajet.png" alt="traject" class="w-[30px] bg-[#F0F4FF] rounded-l p-1">
-                    <h2 class="text-2xl font-bold text-black">
-                        Safi → Marrakech
-                    </h2>
-                </div>
-                <div class="w-fit rounded-2xl text-sm p-2 bg-[#F0F4FF]">
-                    <span>80 DH / place</span>
+            <article class="rounded-2xl bg-white p-5 shadow-sm sm:p-6">
+
+                <div class="flex flex-wrap items-center justify-between gap-4">
+
+                    <div class="flex items-center gap-4">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-100">
+                            <img src="img/trajet.png" alt="trajet" class="h-7 w-7">
+                        </div>
+                        <div>
+                            <p class="text-xs font-medium uppercase tracking-wide text-slate-400">Trajet</p>
+                            <h2 class="text-xl font-semibold text-slate-800 sm:text-2xl">
+                                Safi → Marrakech
+                            </h2>
+                        </div>
+                    </div>
+
+                    <span class="rounded-xl bg-sky-50 px-4 py-1 text-sm font-semibold text-sky-700 ring-1 ring-sky-100">
+                        80 DH / place
+                    </span>
+
                 </div>
 
-                <section class="flex gap-6 items-center justify-between w-full flex-wrap">
+                <div
+                    class="mt-5 flex flex-wrap items-center justify-end gap-x-5 gap-y-2 border-t border-slate-100 pt-4 text-sm text-slate-600">
                     <div class="flex-1 flex min-w-40 items-center justify-end gap-2">
                         <div class="w-3 h-3 bg-green-600 rounded-sm"></div>
                         <p class="text-cyan-900 text-sm font-medium">
@@ -56,14 +68,12 @@
                             ocuupé
                         </p>
                     </div>
-
-                </section>
+                </div>
 
             </article>
             <section class="bg-blue-50 rounded-2xl shadow-xl p-4">
                 <div class="bg-white rounded-xl p-3 mb-4 font-medium">Driver 🧑‍✈️</div>
 
-                <!-- Empty grid: JavaScript will fill it with 20 seats -->
                 <div id="seatGrid" class="grid grid-cols-[1fr_1fr_0.3fr_1fr_1fr] gap-2"></div>
             </section>
             <section class="bg-white rounded-2xl shadow-xl p-6 h-fit ">
@@ -76,7 +86,7 @@
                 <div>
                     <label for="siege-reservation" class="block text-sm font-medium mb-1 rond">Choisir un siège</label>
                     <div class="flex items-center gap-4 justify-between">
-                        <input type="text" id="seatInput" placeholder="-- Siège --"
+                        <input type="text" id="seatInput" placeholder="-- N° de Siège --"
                             class="w-full border border-slate-300 rounded-lg p-2 bg-[#F0F4FF] px-3 py-2">
                         <button type="button" id="reserveButton"
                             class="border-1 px-3 py-2 rounded-xl bg-[#0039A6] text-white">Confirmer</button>
