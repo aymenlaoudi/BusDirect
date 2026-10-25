@@ -84,7 +84,7 @@
 
 
                 <div>
-                    <label for="siege-reservation" class="block text-sm font-medium mb-1 rond">Choisir un siège</label>
+                    <label for="seatInput" class="block text-sm font-medium mb-1 rond">Choisir un siège</label>
                     <div class="flex items-center gap-4 justify-between">
                         <input type="text" id="seatInput" placeholder="-- N° de Siège --"
                             class="w-full border border-slate-300 rounded-lg p-2 bg-[#F0F4FF] px-3 py-2">
@@ -103,7 +103,7 @@
                     <h2 class="text-lg font-semibold mb-4">Modifier une place</h2>
                 </div>
                 <div>
-                    <label for="changeNameSelect" class="block text-sm font-medium mb-1 rond">Passager existant</label>
+                    <label for="changeSelect" class="block text-sm font-medium mb-1 rond">Passager existant</label>
                     <select id="changeSelect"
                         class="w-full border border-slate-300 rounded-lg px-3 py-2 mb-4 bg-[#F0F4FF] focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </select>
@@ -114,7 +114,7 @@
                         class="w-full border border-slate-300 rounded-lg p-2 bg-[#F0F4FF] px-3 py-2">
                 </div>
                 <div>
-                    <label for="siege-reservation" class="block text-sm font-medium mb-1 rond">Nouveau siège</label>
+                    <label for="newSeat" class="block text-sm font-medium mb-1 rond">Nouveau siège</label>
                     <div class="flex items-center gap-4 justify-between">
                         <input type="text" id="newSeat" placeholder="-- Siège --"
                             class="w-full border border-slate-300 rounded-lg p-2 bg-[#F0F4FF] px-3 py-2">
@@ -123,6 +123,26 @@
                     </div>
                 </div>
                 <p id="modifyMessage" class="mt-4 text-sm font-medium"></p>
+            </section>
+            <section
+                class="flex shadow-xl w-full rounded-xl gap-3 p-4 flex-wrap flex-col bg-white shadow-sm p-4 pb-7 mt-5">
+                <div>
+                    <h2 class="text-lg font-semibold mb-4">Supprimer une reservation</h2>
+                </div>
+
+                    <div>
+                    <label for="supSelect" class="block text-sm font-medium mb-1 rond">Passager réservé</label>
+                    </div>
+                    <div class="flex items-center gap-4 justify-between">
+                        <select id="supSelect"
+                            class="w-full border border-slate-300 rounded-lg px-3 py-2 bg-[#F0F4FF] focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </select>
+                        <div class="flex items-center gap-4 justify-between">
+                            <button type="button" id="supBtn"
+                                class="border-1 px-3 py-2 rounded-xl bg-red-200 text-red-600 font-medium">Supprimer</button>
+                        </div>
+                    </div>
+                <p id="supMessage" class="mt-4 text-sm font-medium"></p>
             </section>
     </main>
     <script src="script.js"></script>
