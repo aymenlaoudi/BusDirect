@@ -104,13 +104,13 @@
                 </div>
                 <div>
                     <label for="changeNameSelect" class="block text-sm font-medium mb-1 rond">Passager existant</label>
-                    <select id="changeNameSelect"
+                    <select id="changeSelect"
                         class="w-full border border-slate-300 rounded-lg px-3 py-2 mb-4 bg-[#F0F4FF] focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </select>
                 </div>
                 <div>
                     <label for="name" class="block text-sm font-medium rond mb-1">Nom du passager :</label>
-                    <input type="text" name="name" id="newPassager" placeholder="Modifier le nom"
+                    <input type="text" name="name" id="modifyNameInput" placeholder="Modifier le nom"
                         class="w-full border border-slate-300 rounded-lg p-2 bg-[#F0F4FF] px-3 py-2">
                 </div>
                 <div>
@@ -118,11 +118,11 @@
                     <div class="flex items-center gap-4 justify-between">
                         <input type="text" id="newSeat" placeholder="-- Siège --"
                             class="w-full border border-slate-300 rounded-lg p-2 bg-[#F0F4FF] px-3 py-2">
-                        <button type="button" id="modifierBtn"
+                        <button type="button" id="modifyBtn"
                             class="border-1 px-3 py-2 rounded-xl bg-blue-100 text-blue-800 font-medium">Modifier</button>
                     </div>
                 </div>
-
+                <p id="modifyMessage" class="mt-4 text-sm font-medium"></p>
             </section>
     </main>
     <script src="script.js"></script>
