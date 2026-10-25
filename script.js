@@ -13,6 +13,10 @@ const newSeatInput = document.getElementById("newSeat");
 const modifyButton = document.getElementById("modifyBtn");
 const modifyMessage = document.getElementById("modifyMessage");
 
+const supSelect = document.getElementById("supSelect");
+const supBtn = document.getElementById("supBtn");
+const supMessage = document.getElementById("supMessage");
+
 const freeSeatStyle =
     "flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 py-4 cursor-pointer hover:border-green-500";
 const reservedSeatStyle =
@@ -48,14 +52,14 @@ function createSeats() {
 }
 
 
-    function showMessage(element, text, isError) {
-      element.textContent = text;
-      if (isError) {
+function showMessage(element, text, isError) {
+    element.textContent = text;
+    if (isError) {
         element.className = "mt-4 text-sm font-medium text-red-600";
-      } else {
+    } else {
         element.className = "mt-4 text-sm font-medium text-green-700";
-      }
     }
+}
 
 function markSeatAsReserved(seatNumber, name) {
     reservations[seatNumber] = name;
@@ -67,35 +71,35 @@ function markSeatAsReserved(seatNumber, name) {
     label.textContent = name;
     updateModifySelect();
 }
-   function fillNameBox() {
-      if (modifySelect.value === "") {
+function fillNameBox() {
+    if (modifySelect.value === "") {
         modifyNameInput.value = "";
-      } else {
+    } else {
         modifyNameInput.value = reservations[modifySelect.value];
-      }
     }
+}
 
 function reserveSeat() {
     const name = nameInput.value.trim();
     const seatNumber = Number(seatInput.value);
 
     if (name === "") {
-        showMessage(message,"Please enter your name.", true);
-        return; 
+        showMessage(message, "Please enter your name.", true);
+        return;
     }
 
     if (seatInput.value === "" || !Number.isInteger(seatNumber) || seatNumber < 1 || seatNumber > totalSeats) {
-        showMessage(message,"Please enter a seat number between 1 and " + totalSeats + ".", true);
+        showMessage(message, "Please enter a seat number between 1 and " + totalSeats + ".", true);
         return;
     }
 
     if (reservations[seatNumber] !== undefined) {
-        showMessage(message,"Seat " + seatNumber + " is already reserved by " + reservations[seatNumber] + ".", true);
+        showMessage(message, "Seat " + seatNumber + " is already reserved by " + reservations[seatNumber] + ".", true);
         return;
     }
 
     markSeatAsReserved(seatNumber, name);
-    showMessage(message,"Seat " + seatNumber + " is reserved for " + name + ".", false);
+    showMessage(message, "Seat " + seatNumber + " is reserved for " + name + ".", false);
 
     nameInput.value = "";
     seatInput.value = "";
@@ -103,25 +107,6 @@ function reserveSeat() {
 
 createSeats();
 
-markSeatAsReserved(3, "Sarah L.");
-markSeatAsReserved(4, "Marc D.");
-markSeatAsReserved(14, "Claire B.");
-
-reserveButton.addEventListener("click", reserveSeat);
-
-function updateModifySelect() {
-    modifySelect.innerHTML = "";
-    const firstOption = document.createElement("option");
-    firstOption.value = "";
-    firstOption.textContent = "Choose a passenger";
-    modifySelect.appendChild(firstOption);
-    for (let seatNumber in reservations) {
-        const option = document.createElement("option");
-        option.value = seatNumber;
-        option.textContent = reservations[seatNumber] + " (seat " + seatNumber + ")";
-        modifySelect.appendChild(option);
-    }
-}
 
 function markSeatAsFree(seatNumber) {
     delete reservations[seatNumber];
@@ -135,47 +120,82 @@ function markSeatAsFree(seatNumber) {
     updateModifySelect();
 }
 function modifyReservation() {
-      const oldSeat = Number(modifySelect.value);
-      const newName = modifyNameInput.value.trim();
-      const newSeat = Number(newSeatInput.value);
+    const oldSeat = Number(modifySelect.value);
+    const newName = modifyNameInput.value.trim();
+    const newSeat = Number(newSeatInput.value);
 
-      if (modifySelect.value === "") {
+    if (modifySelect.value === "") {
         showMessage(modifyMessage, "Please choose a passenger.", true);
         return;
-      }
-
-      if (newName === "") {
-        showMessage(modifyMessage, "Please enter a name.", true);
-        return;
-      }
-
-      if (newSeatInput.value === "" || !Number.isInteger(newSeat) || newSeat < 1 || newSeat > totalSeats) {
-        showMessage(modifyMessage, "Please enter a seat number between 1 and " + totalSeats + ".", true);
-        return;
-      }
-
-      if (newSeat !== oldSeat && reservations[newSeat] !== undefined) {
-        showMessage(modifyMessage, "Seat " + newSeat + " is already reserved by " + reservations[newSeat] + ".", true);
-        return;
-      }
-
-      if (newSeat === oldSeat && newName === reservations[oldSeat]) {
-        showMessage(modifyMessage, "Nothing to change: same name and same seat.", true);
-        return;
-      }
-
-      markSeatAsFree(oldSeat);
-      markSeatAsReserved(newSeat, newName);
-      showMessage(modifyMessage, newName + " is now in seat " + newSeat + ".", false);
-
-      modifyNameInput.value = "";
-      newSeatInput.value = "";
     }
 
-    markSeatAsReserved(3, "Sarah L.");
-    markSeatAsReserved(4, "Marc D.");
-    markSeatAsReserved(14, "Claire B.");
+    if (newName === "") {
+        showMessage(modifyMessage, "Please enter a name.", true);
+        return;
+    }
 
-    reserveButton.addEventListener("click", reserveSeat);
-    modifySelect.addEventListener("change", fillNameBox);
-    modifyButton.addEventListener("click", modifyReservation);
+    if (newSeatInput.value === "" || !Number.isInteger(newSeat) || newSeat < 1 || newSeat > totalSeats) {
+        showMessage(modifyMessage, "Please enter a seat number between 1 and " + totalSeats + ".", true);
+        return;
+    }
+
+    if (newSeat !== oldSeat && reservations[newSeat] !== undefined) {
+        showMessage(modifyMessage, "Seat " + newSeat + " is already reserved by " + reservations[newSeat] + ".", true);
+        return;
+    }
+
+    if (newSeat === oldSeat && newName === reservations[oldSeat]) {
+        showMessage(modifyMessage, "Nothing to change: same name and same seat.", true);
+        return;
+    }
+
+    markSeatAsFree(oldSeat);
+    markSeatAsReserved(newSeat, newName);
+    showMessage(modifyMessage, newName + " is now in seat " + newSeat + ".", false);
+
+    modifyNameInput.value = "";
+    newSeatInput.value = "";
+}
+
+markSeatAsReserved(3, "Sarah L.");
+markSeatAsReserved(4, "Marc D.");
+markSeatAsReserved(14, "Claire B.");
+
+reserveButton.addEventListener("click", reserveSeat);
+modifySelect.addEventListener("change", fillNameBox);
+modifyButton.addEventListener("click", modifyReservation);
+
+
+function fillSelect(select) {
+    select.innerHTML = "";
+    const firstOption = document.createElement("option");
+    firstOption.value = "";
+    firstOption.textContent = "Choose a passenger";
+    select.appendChild(firstOption);
+    for (let seatNumber in reservations) {
+        const option = document.createElement("option");
+        option.value = seatNumber;
+        option.textContent = reservations[seatNumber] + " (seat " + seatNumber + ")";
+        select.appendChild(option);
+    }
+}
+
+function updateModifySelect() {
+    fillSelect(modifySelect);
+    fillSelect(supSelect);
+}
+
+function deleteReservation() {
+    if (supSelect.value === "") {
+        showMessage(supMessage, "Please choose a passenger.", true);
+        return;
+    }
+
+    const seatNumber = supSelect.value;
+    const name = reservations[seatNumber];
+
+    markSeatAsFree(seatNumber);
+    showMessage(supMessage, name + " (seat " + seatNumber + ") has been deleted.", false);
+}
+
+supBtn.addEventListener("click", deleteReservation);
