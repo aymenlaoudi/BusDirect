@@ -85,9 +85,15 @@ function fillNameBox() {
 function reserveSeat() {
     const name = nameInput.value.trim();
     const seatNumber = Number(seatInput.value);
+    const names = Object.values(reservations).includes(name);
 
     if (name === "") {
         showMessage(message, "Please enter your name.", true);
+        return;
+    }
+
+    if (names){
+        showMessage(message, "This name "+name+" already exist.",true)
         return;
     }
 
