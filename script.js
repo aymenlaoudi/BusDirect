@@ -113,6 +113,8 @@ function reserveSeat() {
     prixCounter()
     nameInput.value = "";
     seatInput.value = "";
+
+    save();
 }
 
 createSeats();
@@ -133,6 +135,7 @@ function modifyReservation() {
     const oldSeat = Number(modifySelect.value);
     const newName = modifyNameInput.value.trim();
     const newSeat = Number(newSeatInput.value);
+    const names = Object.values(reservations).includes(newName);
 
     if (modifySelect.value === "") {
         showMessage(modifyMessage, "Please choose a passenger.", true);
@@ -141,6 +144,11 @@ function modifyReservation() {
 
     if (newName === "") {
         showMessage(modifyMessage, "Please enter a name.", true);
+        return;
+    }
+
+    if (names){
+        showMessage(modifyMessage, "This name "+newName+" already exist.",true)
         return;
     }
 
@@ -165,11 +173,13 @@ function modifyReservation() {
 
     modifyNameInput.value = "";
     newSeatInput.value = "";
+
+    save();
 }
 
-markSeatAsReserved(3, "Sarah L.");
-markSeatAsReserved(4, "Marc D.");
-markSeatAsReserved(14, "Claire B.");
+markSeatAsReserved(3, "Salah");
+markSeatAsReserved(4, "Marc");
+markSeatAsReserved(14, "Zakaria");
 
 reserveButton.addEventListener("click", reserveSeat);
 modifySelect.addEventListener("change", fillNameBox);
@@ -224,4 +234,9 @@ function prixCounter() {
     console.log(price);
     prix.textContent = price + " DH";
 }
+
+function save() {
+    localStorage.setItem("reservations", JSON.stringify(reservations));
+}
+reservations = JSON.parse(localStorage.getItem('reservations')||[]);
 
