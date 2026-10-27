@@ -104,6 +104,7 @@ function reserveSeat() {
     markSeatAsReserved(seatNumber, name);
     showMessage(message, "Seat " + seatNumber + " is reserved for " + name + ".", false);
     seatCounter();
+    prixCounter()
     nameInput.value = "";
     seatInput.value = "";
 }
@@ -199,15 +200,22 @@ function deleteReservation() {
 
     markSeatAsFree(seatNumber);
     showMessage(supMessage, name + " (seat " + seatNumber + ") has been deleted.", false);
-    seatCounter()
+    seatCounter();
+    prixCounter();
 }
 
 supBtn.addEventListener("click", deleteReservation);
 
 places.textContent = totalSeats - Object.keys(reservations).length + "/" + totalSeats;
-
 function seatCounter() {
     const disp_seats = totalSeats - Object.keys(reservations).length;
     places.textContent = disp_seats + "/20";
+}
+
+prix.textContent = Object.keys(reservations).length * 80 + " DH";
+function prixCounter() {
+    const price = Object.keys(reservations).length * 80;
+    console.log(price);
+    prix.textContent = price + " DH";
 }
 
