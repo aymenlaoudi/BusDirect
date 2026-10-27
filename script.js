@@ -218,6 +218,7 @@ function deleteReservation() {
     showMessage(supMessage, name + " (seat " + seatNumber + ") has been deleted.", false);
     seatCounter();
     prixCounter();
+    save();
 }
 
 supBtn.addEventListener("click", deleteReservation);
@@ -234,9 +235,9 @@ function prixCounter() {
     console.log(price);
     prix.textContent = price + " DH";
 }
-
+reservations = JSON.parse(localStorage.getItem('reservations')||[]);
 function save() {
     localStorage.setItem("reservations", JSON.stringify(reservations));
 }
-reservations = JSON.parse(localStorage.getItem('reservations')||[]);
+
 
