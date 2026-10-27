@@ -5,6 +5,9 @@ const seatInput = document.getElementById("seatInput");
 const reserveButton = document.getElementById("reserveButton");
 const message = document.getElementById("message");
 
+const places = document.getElementById("places");
+const prix = document.getElementById("prix");
+
 const reservations = {};
 
 const modifySelect = document.getElementById("changeSelect");
@@ -20,7 +23,7 @@ const supMessage = document.getElementById("supMessage");
 const freeSeatStyle =
     "flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 py-4 cursor-pointer hover:border-green-500";
 const reservedSeatStyle =
-    "flex flex-col items-center justify-center rounded-xl border border-green-700 bg-green-500 text-white py-4 cursor-not-allowed";
+    "flex flex-col items-center justify-center rounded-xl border border-green-700 bg-green-500 text-white py-4 cursor-pointer";
 
 function createSeats() {
     for (let i = 1; i <= totalSeats; i++) {
@@ -37,9 +40,9 @@ function createSeats() {
         label.className = "text-xs mt-1";
         label.textContent = "Free";
 
+        seatGrid.appendChild(seat);
         seat.appendChild(number);
         seat.appendChild(label);
-        seatGrid.appendChild(seat);
 
         seat.addEventListener("click", function () {
             seatInput.value = i;
@@ -100,7 +103,7 @@ function reserveSeat() {
 
     markSeatAsReserved(seatNumber, name);
     showMessage(message, "Seat " + seatNumber + " is reserved for " + name + ".", false);
-
+    seatCounter();
     nameInput.value = "";
     seatInput.value = "";
 }
@@ -196,6 +199,15 @@ function deleteReservation() {
 
     markSeatAsFree(seatNumber);
     showMessage(supMessage, name + " (seat " + seatNumber + ") has been deleted.", false);
+    seatCounter()
 }
 
 supBtn.addEventListener("click", deleteReservation);
+
+places.textContent = totalSeats - Object.keys(reservations).length + "/" + totalSeats;
+
+function seatCounter() {
+    const disp_seats = totalSeats - Object.keys(reservations).length;
+    places.textContent = disp_seats + "/20";
+}
+
